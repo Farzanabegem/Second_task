@@ -1,0 +1,285 @@
+
+
+   1.  Create a Student class with fields like ID, name, marks.
+     public class Student {
+
+    
+    private int id;
+    private String name;
+    private double marks;
+     public Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+
+    // Setter methods to modify the fields
+    // These methods allow the private fields to be changed from outside the class.
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+
+  
+    public void displayStudentInfo() {
+        System.out.println("Student ID: " + this.id);
+        System.out.println("Student Name: " + this.name);
+        System.out.println("Student Marks: " + this.marks);
+    }
+
+   
+    public static void main(String[] args) {
+       
+        Student student1 = new Student(101, "Alice", 85.5);
+
+        
+        System.out.println("Initial student information:");
+        student1.displayStudentInfo();
+        System.out.println();
+
+        
+        student1.setMarks(90.0);
+
+       
+        System.out.println("Updated student information:");
+        student1.displayStudentInfo();
+    }
+}
+2.Use ArrayList to store student objects.
+
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+
+public class StudentManagementSystem {
+
+  
+    private static class Student {
+        private int id;
+        private String name;
+        private double marks;
+
+        public Student(int id, String name, double marks) {
+            this.id = id;
+            this.name = name;
+            this.marks = marks;
+        }
+
+        // Getter methods
+        public int getId() { return id; }
+        public String getName() { return name; }
+        public double getMarks() { return marks; }
+
+        // Setter methods
+        public void setName(String name) { this.name = name; }
+        public void setMarks(double marks) { this.marks = marks; }
+
+        @Override
+        public String toString() {
+            return "ID: " + id + ", Name: " + name + ", Marks: " + marks;
+        }
+    }
+
+    // The main list to hold all the student objects.
+    private static ArrayList<Student> students = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int choice = -1;
+
+        // Main loop for the menu
+        while (choice != 5) {
+            displayMenu();
+            try {
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+
+                switch (choice) {
+                    case 1:
+                        addStudent();
+                        break;
+                    case 2:
+                        viewAllStudents();
+                        break;
+                    case 3:
+                        updateStudent();
+                        break;
+                    case 4:
+                        deleteStudent();
+                        break;
+                    case 5:
+                        System.out.println("Exiting the program. Goodbye!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear the invalid input from the scanner
+            }
+            System.out.println();
+        }
+        scanner.close();
+    }
+    private static void displayMenu() {
+        System.out.println("--- Student Management System ---");
+        System.out.println("1. Add a new student");
+        System.out.println("2. View all students");
+        System.out.println("3. Update a student's details");
+        System.out.println("4. Delete a student");
+        System.out.println("5. Exit");
+    }
+
+  
+    private static Student findStudentById(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    private static void addStudent() {
+        try {
+            System.out.print("Enter student ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            // Check if ID already exists
+            if (findStudentById(id) != null) {
+                System.out.println("Error: Student with this ID already exists.");
+                return;
+            }
+3.Implement options: Add, View, Update, Delete.
+   import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CrudApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> items = new ArrayList<>();
+        boolean running = true;
+
+        while (running) {
+            // Display menu
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. Add Item");
+            System.out.println("2. View Items");
+            System.out.println("3. Update Item");
+            System.out.println("4. Delete Item");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option (1-5): ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline after number
+
+            switch (choice) {
+                case 1:
+                    // Add
+                    System.out.print("Enter item to add: ");
+                    String newItem = scanner.nextLine();
+                    items.add(newItem);
+                    System.out.println("Item added.");
+                    break;
+
+                case 2:
+                    // View
+                    System.out.println("\n--- Item List ---");
+                    if (items.isEmpty()) {
+                        System.out.println("No items found.");
+                    } else {
+                        for (int i = 0; i < items.size(); i++) {
+                            System.out.println((i + 1) + ". " + items.get(i));
+                        }
+                    }
+                    break;
+
+                case 3:
+                    // Update
+                    System.out.print("Enter item number to update: ");
+                    int updateIndex = scanner.nextInt() - 1;
+                    scanner.nextLine(); // Consume newline
+
+                    if (updateIndex >= 0 && updateIndex < items.size()) {
+                        System.out.print("Enter new value: ");
+              }
+          1.What is encapsulation?
+2.How are ArrayLists different from arrays?
+   Feature	          ArrayList	                                                                                          Array
+Size	             Dynamic; it can grow or shrink as needed.	                                                 Static; its size is fixed at the time of creation.
+Data Type	          Stores only objects (e.g., Integer, String). Primitive types are automatically boxed.   	Can store both primitive types and objects.
+Performance	            Slower for element access due to potential resizing.	                              Faster for element access because elements are stored in contiguous memory.
+Flexibility	           Offers a rich set of methods (e.g., add(), remove()).	                          Simple, with no built-in methods for manipulation.
+3.How to sort an ArrayList?
+   You can sort an ArrayList in Java using the Collections.sort() method for simple sorting or by providing a custom Comparator for more complex sorting logic.
+  import java.util.ArrayList;
+import java.util.Comparator;
+
+ArrayList<Student> students = new ArrayList<>();
+students.sort(Comparator.comparing(Student::getName));
+// Sorts the students by name
+4.What is constructor overloading?
+   Constructor overloading is the process of having multiple constructors in a single class with the same name but different parameters. This allows you to create objects in different ways, with varying sets of initial values. The compiler chooses the correct constructor based on the arguments provided when you create a new object using the new keyword.
+
+For example, a Student class could have one constructor that takes an ID and name, and another that takes an ID, name, and marks.
+5.How does garbage collection work in Java?
+   Garbage collection is an automatic process that reclaims memory from objects that are no longer in use. The JVM automatically identifies objects that have no active references pointing to them and deletes them from the heap. This prevents memory leaks and saves the programmer from manually managing memory allocation and deallocation.
+6.Why do we use getters and setters?
+   Getters (accessor methods) and setters (mutator methods) are used to access and modify the private fields of a class. They are essential for encapsulation because they provide a controlled interface to the class's data.
+
+Getters allow you to retrieve the value of a field without giving direct access.
+
+Setters allow you to change the value of a field, often with built-in validation to ensure the new value is valid.
+
+Using getters and setters protects the internal state of an object and helps maintain data integrity.
+7.What is a static variable?
+   A static variable (or class variable) is a variable that belongs to the class itself, rather than to any specific instance of the class. This means there is only one copy of a static variable, shared among all objects of that class. Static variables are typically used for constants or for data that needs to be shared across all instances. They are declared with the static keyword.
+8.What is the use of final keyword?
+The final keyword is used to declare something as a constant, meaning it cannot be changed. It can be applied to:
+
+Variables: A final variable must be initialized once and its value cannot be changed. This is commonly used for defining constants, such as final double PI = 3.14159;.
+
+Methods: A final method cannot be overridden by a subclass. This is used to ensure that a method's implementation remains consistent.
+
+Classes: A final class cannot be inherited by any other class. This prevents a class from being extended.
+9.Difference between compile-time and runtime errors?
+  Type of Error    	When it occurs	                                                                       Example
+Compile-time	        During the compilation process, before the program is executed.	            Syntax errors (e.g., a missing semicolon), incorrect data types.
+Runtime	                  While the program is running.    	                                      NullPointerException (accessing a null object), ArrayIndexOutOfBoundsException (accessing an index that doesn't exist).
+
+Export to Sheets
+
+10.What are access modifiers?
+   Access modifiers are keywords in Java that set the accessibility (or scope) of a class, field, constructor, or method. They control which parts of a program can access a particular member. The four access modifiers are:
+
+public: Accessible from anywhere.
+
+private: Accessible only within the class itself.
+
+protected: Accessible within the class, its subclasses, and all classes in the same package.
+
+(Default): Accessible only within the same package.
